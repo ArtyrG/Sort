@@ -27,7 +27,7 @@ public class SortM {
 		System.out.println();
 		System.out.println("Методы для обычного массива : ");
 		sort.sortMassiv(massiv);
-		//dlz sdljmasld
+		//12345679
 
 	}
 			
