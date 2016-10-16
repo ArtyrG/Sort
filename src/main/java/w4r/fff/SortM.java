@@ -13,6 +13,8 @@ import java.util.Arrays;
 
 public class SortM {
 
+	final double FACTOR_DOWN = 1.247;
+
 	public static void main(String[] args) {
 		final int RAND = (int) (Math.random() * 12 + 5); // случайное число от
 															// [5; 16], задает
@@ -45,7 +47,8 @@ public class SortM {
 		System.out.println();
 		System.out.println();
 		System.out.println("Методы для ArrayList: ");
-
+		sort.sortArrayList(massAr);
+//		sort.sortArrayListRa(massAr);
 	}
 
 	/**
@@ -92,7 +95,6 @@ public class SortM {
 
 	int[] sortMassiveRasch(int[] arrayToSort) {
 
-		final double FACTOR_DOWN = 1.247;
 		int[] massiveSort1 = arrayToSort;
 		System.out.println();
 		System.out.println("Метод расческа : ");
@@ -152,4 +154,71 @@ public class SortM {
 		}
 		return massive;
 	}
+
+	ArrayList<Integer> sortArrayList(ArrayList<Integer> arrayToSort) {
+
+		ArrayList<Integer> massive = arrayToSort;
+		System.out.println();
+		System.out.println("Метод пузырька для ArrayList : ");
+		int temp = 0;
+		long start = System.nanoTime();
+		for (int i = 0; i < massive.size(); i++) {
+			for (int j = 0; j < massive.size(); j++) {
+				if (massive.get(i) < massive.get(j)) {
+					temp = massive.get(i);
+					massive.set(i, massive.get(j));
+					massive.set(j, temp);
+				}
+			}
+		}
+		long finish = System.nanoTime();
+
+		System.out.println("Время выполненыя сортировки :" + (finish - start) + "ns");
+		for (Integer s : massive) {
+			System.out.print(s + " ");
+		}
+
+		return massive;
+	}
+
+//	ArrayList<Integer> sortArrayListRa(ArrayList<Integer> arrayToSort) {
+//
+//		ArrayList<Integer> massiveRa = arrayToSort;
+//		System.out.println();
+//		System.out.println("Метод расческа для ArrayList : ");
+//
+//		int step = (int) (massiveRa.size() / FACTOR_DOWN);
+//		int temp = 0;
+//		long start = System.nanoTime();
+//
+//		for (int i = 0, j = step; j - i != 0;) {
+//			if (step == 0)
+//				break;
+//			int as = step;
+//			do {
+//				if (as == massiveRa.size())
+//					break;
+//				if (i == massiveRa.size())
+//					break;
+//				if (massiveRa.get(i) > massiveRa.get(j)) {
+//					temp = massiveRa.get(i);
+//					massiveRa.set(i, j);
+//					massiveRa.set(j, temp);
+//					continue;
+//				}
+//				i++;
+//				as++;
+//			} while (as != massiveRa.size());
+//			i = 0;
+//			step /= FACTOR_DOWN;
+//		}
+//		long finish = System.nanoTime();
+//		System.out.println("Время выполненыя сортировки :" + (finish - start) + "ns");
+//
+//		for (int i : massiveRa) {
+//			System.out.print(massiveRa.get(i) + " ");
+//		}
+//
+//		return massiveRa;
+//	}
 }
